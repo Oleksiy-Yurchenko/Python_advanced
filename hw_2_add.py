@@ -4,7 +4,9 @@ def smallest_integer(array):
     else:
         arr_max = max(array)
         return min(set(array).intersection(set(range(1,arr_max + 1)))) if arr_max > 0 else 1
-    
+
+
+print(smallest_integer([0]))
 print(smallest_integer((1,2,3)))
 print(smallest_integer([-1, 0, 3, 12, 36]))
 print(smallest_integer([-1, 0, 0, 1, 1, 3, 12, 36]))
