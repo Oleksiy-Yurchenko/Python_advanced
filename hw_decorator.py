@@ -94,6 +94,6 @@ def factorial(number):
     return number * factorial(number - 1)
 
 
-#factorial(3)
-#factorial(6)
+factorial(3)
+factorial(6)
 factorial(20)
