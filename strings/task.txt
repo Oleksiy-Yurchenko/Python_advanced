@@ -1,0 +1,13 @@
+#1)Из текстового файла удалить все слова, содержащие от трех до пяти символов, но при #этом из каждой строки должно быть удалено только четное количество таких слов.
+
+Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+
+#2)Текстовый файл содержит записи о телефонах и их владельцах. Переписать в другой файл #телефоны тех владельцев, фамилии которых начинаются с букв К и С.
+
+
+
+#3) Получить файл, в котором текст выровнен по правому краю путем равномерного #добавления пробелов.
+
+
+
+#4)Дан текстовый файл со статистикой посещения сайта за неделю. Каждая строка содержит #ip адрес, время и название дня недели (например, 139.18.150.126 23:12:44 sunday). #Создайте новый текстовый файл, который бы содержал список ip без повторений из первого #файла. Для каждого ip укажите количество посещений, наиболее популярный день недели. #Последней строкой в файле добавьте наиболее популярный отрезок времени в сутках длиной #один час в целом для сайта.

@@ -1,0 +1,6 @@
+ip address: 139.18.150.126, visits: 6, most hits on sunday.
+ip address: 33.55.19.145, visits: 4, most hits on sunday.
+ip address: 122.141.250.56, visits: 4, most hits on monday.
+ip address: 100.100.100.1, visits: 3, most hits on friday.
+ip address: 81.38.12.1, visits: 2, most hits on saturday.
+One hour period with the most hits started at 08:55:16 and ended at 09:55:16.
