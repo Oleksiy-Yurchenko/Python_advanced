@@ -1,4 +1,4 @@
-import os
+import os, re
 
 #2)Текстовый файл содержит записи о телефонах и их владельцах. Переписать в другой файл
 #телефоны тех владельцев, фамилии которых начинаются с букв К и С.
@@ -8,18 +8,19 @@ def extract_k_c_names(input_file, output_file):
     
     phones = []
 
+    template = re.compile(r'^(?P<phone>[0-9]+) (?P<surname>[cCkK][a-zA-Z]+)$')
+    
     if not os.path.exists(input_file):
         raise FileNotFoundError('File does not exist.')
+    
+    with open(input_file, 'r+') as file:
+        for line in file:
+            entry = template.search(line)
+            if entry:
+                phones.append(entry.group('surname') + '\n')
 
-    with open('entries.txt', 'r+') as file:
-        entries = file.readlines()
-        for entry in entries:
-            if entry[10].lower() == 'c' or entry[10].lower() == 'k':
-                phones.append(entry[:9] + '\n')
-
-    with open('phones.txt', 'w') as file:
+    with open(output_file, 'w') as file:
         file.writelines(phones)
-
 
 
 if __name__ == '__main__':

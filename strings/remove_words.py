@@ -11,18 +11,17 @@ def remove_words_from_file(filename):
     template = re.compile(r'\b[a-zA-Z]{3,5}\b')
     result_list = []
     with open(filename,'r') as file:
-        list_of_strings = file.readlines()
-        for string in list_of_strings:
-            words_to_delete = template.findall(string)
+        for line in file:
+            words_to_delete = template.findall(line)
             if len(words_to_delete) < 2:
                 continue
             elif len(words_to_delete) % 2:
                 words_to_delete = words_to_delete[:-1]
             for i in words_to_delete:
-                string = re.sub(i, ' ', string)
-            string = re.sub(r'\s{2,}', ' ', string)
-            string = string.strip()
-            result_list.append(string)
+                line = re.sub(i, ' ', line)
+            line = re.sub(r'\s{2,}', ' ', line)
+            line = line.strip()
+            result_list.append(line + '\n')
     with open(filename,'w') as file:
         file.writelines(result_list)
         

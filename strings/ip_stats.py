@@ -30,10 +30,7 @@ def calculate_ip_stats(input_file, output_file):
     if not os.path.exists(input_file):
         raise FileNotFoundError('File does not exist.')
     with open(input_file, 'r+') as file:
-        ip_visits = file.readlines()
-        if not ip_visits:
-            print('File is empty. Please provide a non-empty file.')
-        for entry in ip_visits:
+        for entry in file:
             ip_list = entry.split()
             ip_addresses[ip_list[0]] += 1 
             ip_days.append((ip_list[0], ip_list[2]))
@@ -56,10 +53,10 @@ def calculate_ip_stats(input_file, output_file):
                 if time_plus_one_hour >= t2 > time:
                     hours[time] += 1
 
-        peak_hour = sorted(hours.items(), key=lambda x: x[1], reverse=True)[0][0]
-        peak_hour_plus_hour = peak_hour + one_hour
+        peak_start = sorted(hours.items(), key=lambda x: x[1], reverse=True)[0][0]
+        peak_stop = peak_start + one_hour
         result.append('One hour period with the most hits started at {0} and ended at {1}.'
-                      .format(peak_hour.strftime('%H:%M:%S'),peak_hour_plus_hour.strftime('%H:%M:%S')))
+                      .format(peak_start.strftime('%H:%M:%S'),peak_stop.strftime('%H:%M:%S')))
         
     with open(output_file, 'w') as file:
         file.writelines(result)
