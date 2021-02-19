@@ -36,6 +36,8 @@ class IpManager:
                     ip_oct_list = ip.split('.')
                     ip_wout_first_oct = '.'.join(ip_oct_list[1:])
                     ip_list_wout_first_oct.append(ip_wout_first_oct)
+                else:
+                    raise ValueError('List of ips should contain ips in correct format.')
         return ip_list_wout_first_oct
 
     def get_last_oct_list(self):
@@ -45,6 +47,8 @@ class IpManager:
                 if IpManager.ip_template.match(ip):
                     ip = ip.split('.')
                     last_oct_list.append('.'.join(ip[-2:]))
+                else:
+                    raise ValueError('List of ips should contain ips in correct format.')
         return last_oct_list
 
 # Задача-2
@@ -64,7 +68,7 @@ class JsonFileHandler:
         if os.path.exists(file) and file.endswith('.json'):
             self.file = file
         else:
-            raise ValueError('Class Instance attribute should be a JSON file.')
+            raise ValueError('Class Instance attribute should be a path to a JSON file.')
 
     def read_json(self):
         with open(self.file, 'r') as file:
