@@ -137,7 +137,6 @@ class Warehouse:
             for material in self.stock:
                 if material.name == name:
                     return material
-        return None
 
     def add_material(self, name, details, quantity, availability, price):
         material = Material(name, details, quantity, availability, price)
@@ -148,26 +147,25 @@ class Warehouse:
         if material:
             self.stock.remove(material)
 
-    def current_quantity(self, material):
+    def print_current_quantity(self, material):
         material = self.find_material(material)
         if material:
             print('Current stock of {0} is {1}'.format(material.name, material.quantity))
         else:
             print('Material does not exist.')
 
-    def current_quantity_all(self):
+    def print_current_quantity_all(self):
         if self.stock:
             for material in self.stock:
-                self.current_quantity(material.name)
+                self.print_current_quantity(material.name)
         else:
             print('Warehouse is empty.')
 
 
-class Category(Warehouse):
+class Category():
     def __init__(self, name):
         self.name = name
         self.members = []
-        super().__init__()
 
     def add_to_category(self, material):
         if isinstance(material, Material):
@@ -211,13 +209,18 @@ class Basket():
 
 
 class Order(Basket):
+    order_id = 0
+
     def __init__(self):
         self.items = {}
-        global order_id
-        order_id += 1
-        self.order_id = order_id
+        self.order_id = Order._generate_order_id()
         self.date_purchased = datetime.datetime.today()
         super().__init__()
+
+    @ classmethod
+    def _generate_order_id(cls):
+        Order.order_id += 1
+        return Order.order_id
 
     def print_order(self):
         id = 0
@@ -228,13 +231,9 @@ class Order(Basket):
             print(id, 'Material: ', material.name, 'Quantity: ', self.items[material])
 
 
-order_id = 0
-
-
-class OrderManager(Basket):
+class OrderManager():
     def __init__(self):
         self.orders = []
-        super().__init__()
 
     def generate_order(self, basket, warehouse):
         if isinstance(basket, Basket) and isinstance(warehouse, Warehouse):
@@ -266,10 +265,10 @@ apples = warehouse.find_material('apples')
 warehouse.add_material('bananas', 'some other details', 20, True, 7)
 bananas = warehouse.find_material('bananas')
 warehouse.add_material('pineapples', 'another details', 20, True, 7)
-warehouse.current_quantity('pineapples')
+warehouse.print_current_quantity('pineapples')
 warehouse.remove_material('pineapples')
-warehouse.current_quantity('pineapples')
-warehouse.current_quantity_all()
+warehouse.print_current_quantity('pineapples')
+warehouse.print_current_quantity_all()
 fruits = Category('fruits')
 warehouse.add_material('pineapples', 'another details', 20, True, 7)
 pineapples = warehouse.find_material('pineapples')
@@ -284,4 +283,4 @@ basket_1.print_basket()
 order_manager = OrderManager()
 order_1 = order_manager.generate_order(basket_1, warehouse)
 order_1.print_order()
-warehouse.current_quantity_all()
+warehouse.print_current_quantity_all()
