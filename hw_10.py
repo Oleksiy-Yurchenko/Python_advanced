@@ -81,7 +81,7 @@ def dispenser(targets):
 
 
 def follow(file, target):
-    file.seek(0,1)
+    file.seek(0,2)
     while True:
         line = file.readline()
         if not line:
