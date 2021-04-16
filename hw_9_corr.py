@@ -21,11 +21,11 @@ class MyClass:
     email = EmailDescriptor()
 
 
-my_class = MyClass()
-my_class.email = "validemail@gmail.com"
-print(my_class.email)
-#my_class.email = "novalidemail"
-#print(my_class.email)
+# my_class = MyClass()
+# my_class.email = "validemail@gmail.com"
+# print(my_class.email)
+# my_class.email = "novalidemail"
+# print(my_class.email)
 # Raised Exception
 
 
@@ -41,12 +41,12 @@ class Singleton(type):
         return cls._instances[cls]
 
 
-class MyClass(metaclass=Singleton):
+class MySingletonClass(metaclass=Singleton):
     pass
 
 
-c = MyClass()
-b = MyClass()
+c = MySingletonClass()
+b = MySingletonClass()
 assert id(c) == id(b)
 
 
@@ -68,13 +68,13 @@ class Data:
     number = IntegerField('number')
 
 
-data_row = Data()
-new_data_row = Data()
-
-data_row.number = 5
-new_data_row.number = 10
-
-assert data_row.number != new_data_row.number
+# data_row = Data()
+# new_data_row = Data()
+#
+# data_row.number = 5
+# new_data_row.number = 10
+#
+# assert data_row.number != new_data_row.number
 
 
 # Задача4
@@ -103,11 +103,11 @@ assert data_row.number != new_data_row.number
 
 
 class Material:
-    VAT = 0.20
+    VAT = 0.2
 
     class PriceDescriptor:
         def __get__(self, instance, owner):
-            return instance.price * (1 + Material.VAT)
+            return instance._price * (1 + Material.VAT)
 
     price = PriceDescriptor()
 
@@ -116,7 +116,7 @@ class Material:
         self.details = details
         self._quantity = quantity
         self.availability = availability
-        self.price = price
+        self._price = price
         self.category = None
 
     @ property
@@ -248,6 +248,8 @@ class OrderManager():
                     else:
                         print('Quantity of material {0} is not enough to process your order, so it will not be added.'
                               .format(material.name))
+                else:
+                    raise TypeError('Material is not in the warehouse.')
             return order
 
     def find_order(self, order_id):
@@ -258,29 +260,29 @@ class OrderManager():
         return None
 
 
-warehouse = Warehouse()
-
-warehouse.add_material('apples', 'some details', 10, True, 5)
-apples = warehouse.find_material('apples')
-warehouse.add_material('bananas', 'some other details', 20, True, 7)
-bananas = warehouse.find_material('bananas')
-warehouse.add_material('pineapples', 'another details', 20, True, 7)
-warehouse.print_current_quantity('pineapples')
-warehouse.remove_material('pineapples')
-warehouse.print_current_quantity('pineapples')
-warehouse.print_current_quantity_all()
-fruits = Category('fruits')
-warehouse.add_material('pineapples', 'another details', 20, True, 7)
-pineapples = warehouse.find_material('pineapples')
-fruits.add_to_category(pineapples)
-fruits.add_to_category(apples)
-fruits.add_to_category(bananas)
-fruits.print_category()
-basket_1 = Basket()
-basket_1.add_to_basket(apples, 1)
-basket_1.add_to_basket(pineapples, 1)
-basket_1.print_basket()
-order_manager = OrderManager()
-order_1 = order_manager.generate_order(basket_1, warehouse)
-order_1.print_order()
-warehouse.print_current_quantity_all()
+# warehouse = Warehouse()
+#
+# warehouse.add_material('apples', 'some details', 10, True, 5)
+# apples = warehouse.find_material('apples')
+# warehouse.add_material('bananas', 'some other details', 20, True, 7)
+# bananas = warehouse.find_material('bananas')
+# warehouse.add_material('pineapples', 'another details', 20, True, 7)
+# warehouse.print_current_quantity('pineapples')
+# warehouse.remove_material('pineapples')
+# warehouse.print_current_quantity('pineapples')
+# warehouse.print_current_quantity_all()
+# fruits = Category('fruits')
+# warehouse.add_material('pineapples', 'another details', 20, True, 7)
+# pineapples = warehouse.find_material('pineapples')
+# fruits.add_to_category(pineapples)
+# fruits.add_to_category(apples)
+# fruits.add_to_category(bananas)
+# fruits.print_category()
+# basket_1 = Basket()
+# basket_1.add_to_basket(apples, 1)
+# basket_1.add_to_basket(pineapples, 1)
+# basket_1.print_basket()
+# order_manager = OrderManager()
+# order_1 = order_manager.generate_order(basket_1, warehouse)
+# order_1.print_order()
+# warehouse.print_current_quantity_all()
