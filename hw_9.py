@@ -15,17 +15,17 @@ class EmailDescriptor:
         if email_template.search(value):
             self.email = value
         else:
-            raise ValueError('{0} is not a valid email.'.format(value))
+            raise ValueError #('{0} is not a valid email.'.format(value))
 
 class MyClass:
     email = EmailDescriptor()
 
 
 my_class = MyClass()
-my_class.email = "validemail@gmail.com"
+# my_class.email = "validemail@gmail.com"
+# print(my_class.email)
+my_class.email = "novalidemail"
 print(my_class.email)
-#my_class.email = "novalidemail"
-#print(my_class.email)
 # Raised Exception
 
 
@@ -45,9 +45,9 @@ class MyClass(metaclass=Singleton):
     pass
 
 
-c = MyClass()
-b = MyClass()
-assert id(c) == id(b)
+# c = MyClass()
+# b = MyClass()
+# assert id(c) == id(b)
 
 
 # Задача-3
@@ -68,13 +68,13 @@ class Data:
     number = IntegerField('number')
 
 
-data_row = Data()
-new_data_row = Data()
-
-data_row.number = 5
-new_data_row.number = 10
-
-assert data_row.number != new_data_row.number
+# data_row = Data()
+# new_data_row = Data()
+#
+# data_row.number = 5
+# new_data_row.number = 10
+#
+# assert data_row.number != new_data_row.number
 
 
 # Задача4
